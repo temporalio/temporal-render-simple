@@ -1,0 +1,74 @@
+databases:
+- name: temporal
+  databaseName: temporal
+  user: temporal
+  plan: standard
+
+services:
+- type: pserv
+  name: temporal
+  autoDeploy: false
+  plan: Standard
+  env: docker
+  dockerfilePath: ./server/Dockerfile
+  envVars:
+  - key: PORT
+    value: 7233
+  - key: DYNAMIC_CONFIG_FILE_PATH
+    value: /etc/temporal/dynamicconfig.yaml
+  - key: SKIP_POSTGRES_DB_CREATION
+    value: true # Render creates the database when the DB is created
+  - key: DB
+    value: postgresql
+  - key: DBNAME
+    fromDatabase:
+      name: temporal
+      property: database
+  - key: VISIBILITY_DBNAME
+    fromDatabase:
+      name: temporal
+      property: database
+  - key: DB_PORT
+    fromDatabase:
+      name: temporal
+      property: port
+  - key: POSTGRES_USER
+    fromDatabase:
+      name: temporal
+      property: user
+  - key: POSTGRES_PWD
+    fromDatabase:
+      name: temporal
+      property: password
+  - key: POSTGRES_SEEDS
+    fromDatabase:
+      name: temporal
+      property: host
+- type: worker
+  name: temporal-admin-tools
+  autoDeploy: false
+  plan: Standard
+  env: docker
+  dockerfilePath: ./admin-tools/Dockerfile
+  envVars:
+  - key: TEMPORAL_CLI_ADDRESS
+    fromService:
+      name: temporal
+      type: pserv
+      property: hostport
+- type: web
+  name: temporal-web
+  autoDeploy: false
+  plan: Standard
+  env: docker
+  dockerfilePath: ./web/Dockerfile
+  envVars:
+  - key: PORT
+    value: 8088
+  - key: TEMPORAL_PERMIT_WRITE_API
+    value: true
+  - key: TEMPORAL_GRPC_ENDPOINT
+    fromService:
+      name: temporal
+      type: pserv
+      property: hostport
