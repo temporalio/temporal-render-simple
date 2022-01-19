@@ -3,6 +3,10 @@ databases:
   databaseName: temporal
   user: temporal
   plan: standard
+- name: temporal-visibility
+  databaseName: visibility
+  user: visibility
+  plan: standard
 
 services:
 - type: pserv
@@ -24,10 +28,6 @@ services:
     fromDatabase:
       name: temporal
       property: database
-  - key: VISIBILITY_DBNAME
-    fromDatabase:
-      name: temporal
-      property: database
   - key: DB_PORT
     fromDatabase:
       name: temporal
@@ -43,6 +43,26 @@ services:
   - key: POSTGRES_SEEDS
     fromDatabase:
       name: temporal
+      property: host
+  - key: VISIBILITY_DBNAME
+    fromDatabase:
+      name: temporal-visibility
+      property: database
+  - key: VISIBILITY_DB_PORT
+    fromDatabase:
+      name: temporal-visibility
+      property: port
+  - key: VISIBILITY_POSTGRES_USER
+    fromDatabase:
+      name: temporal-visibility
+      property: user
+  - key: VISIBILITY_POSTGRES_PWD
+    fromDatabase:
+      name: temporal-visibility
+      property: password
+  - key: VISIBILITY_POSTGRES_SEEDS
+    fromDatabase:
+      name: temporal-visibility
       property: host
 - type: worker
   name: temporal-admin-tools
