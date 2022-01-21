@@ -9,7 +9,7 @@ databases:
   plan: standard
 
 services:
-- type: web
+- type: pserv
   name: temporal
   autoDeploy: false
   plan: Standard
