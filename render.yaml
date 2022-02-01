@@ -90,5 +90,5 @@ services:
   - key: TEMPORAL_GRPC_ENDPOINT
     fromService:
       name: temporal
-      type: web
+      type: pserv
       property: hostport
