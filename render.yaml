@@ -74,7 +74,7 @@ services:
   - key: TEMPORAL_CLI_ADDRESS
     fromService:
       name: temporal
-      type: web
+      type: pserv
       property: hostport
 - type: web
   name: temporal-web
@@ -90,5 +90,5 @@ services:
   - key: TEMPORAL_GRPC_ENDPOINT
     fromService:
       name: temporal
-      type: web
+      type: pserv
       property: hostport
