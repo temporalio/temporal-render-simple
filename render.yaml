@@ -2,17 +2,20 @@ databases:
 - name: temporal-db
   databaseName: temporal
   user: temporal
-  plan: standard
+  plan: Starter
+  region: oregon
 - name: temporal-db-visibility
   databaseName: visibility
   user: visibility
-  plan: standard
+  plan: Starter
+  region: oregon
 
 services:
 - type: pserv
   name: temporal
   autoDeploy: false
-  plan: Standard
+  plan: Starter
+  region: oregon
   env: docker
   dockerfilePath: ./server/Dockerfile
   envVars:
@@ -73,7 +76,8 @@ services:
 - type: web
   name: temporal-ui
   autoDeploy: false
-  plan: Standard
+  plan: Starter
+  region: oregon
   env: docker
   dockerfilePath: ./web/Dockerfile
   envVars:
@@ -88,6 +92,8 @@ services:
       property: host
 - type: web
   name: app-workflow-trigger
+  plan: Starter
+  region: oregon
   env: go
   buildCommand: go build start/main.go
   startCommand: ./main
@@ -99,6 +105,8 @@ services:
       property: host
 - type: worker
   name: app-worker
+  plan: Starter
+  region: oregon
   env: go
   buildCommand: go build worker/main.go
   startCommand: ./main
