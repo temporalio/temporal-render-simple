@@ -6,6 +6,8 @@ The deployment also includes an example Go app that interacts with the cluster. 
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
+> ⚠️ Note: this blueprint spins up 3 server instances and 2 Postgres instances, which (as of Feb 2022) will cost $115 if left running for a whole month. Remember to tear down your resources when just kicking the tires.
+
 This repo defines a [Render Blueprint](https://render.com/docs/blueprint-spec) with the following components:
 - Temporal cluster:
     - Two Postgres databases, `temporal-db` and `temporal-db-visibility`.
