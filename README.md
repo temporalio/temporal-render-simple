@@ -13,7 +13,7 @@ This repo defines a [Render Blueprint](https://render.com/docs/blueprint-spec) w
     - Two Postgres databases, `temporal-db` and `temporal-db-visibility`.
     - A `temporal` server that runs all Temporal services.
     - `temporal-ui` provides the Temporal web UI.
-- Example app (based on Temporal's [Go SDK Example](https://github.com/temporalio/money-transfer-project-template-go)):
+- Example app (from [Render's sample Temporal app](https://github.com/render-examples/sample-temporal-app)):
     - `app-workflow-trigger` runs a simple HTTP server with two routes:
         - `/` for health checking.
         - `/trigger-workflow` for kicking off the `TransferMoney` workflow.

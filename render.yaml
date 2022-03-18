@@ -91,6 +91,7 @@ services:
       type: pserv
       property: host
 - type: web
+  repo: https://github.com/render-examples/sample-temporal-app
   name: app-workflow-trigger
   plan: Starter
   region: oregon
@@ -104,6 +105,7 @@ services:
       type: pserv
       property: host
 - type: worker
+  repo: https://github.com/render-examples/sample-temporal-app
   name: app-worker
   plan: Starter
   region: oregon
