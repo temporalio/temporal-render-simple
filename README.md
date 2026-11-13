@@ -23,55 +23,20 @@ This repo defines a [Render Blueprint](https://render.com/docs/blueprint-spec) w
 
 1. Click the "Deploy to Render" button.
 2. In your Render dashboard, click on the service `app-workflow-trigger`, and copy its URL. Let's say it's `https://app-workflow-trigger.onrender.com/`.
-3. To verify that your Temporal cluster is running correctly, you can use Temporal's CLI tool `tctl`. Gain shell access to the `temporal` service:
+3. To verify that your Temporal cluster is running correctly, use Temporal CLI, which is included in the `temporal` service image. Gain shell access to the `temporal` service:
     - Using [SSH](https://render.com/docs/ssh).
-    - Using the web shell:
-      ![web-shell](./assets/temporal-shell.png)
+    - Using the **Shell** tab on the service's Render dashboard.
 
-   Some commands to run (with expected, non-exact output):
+   Check the frontend's health (expected output: `SERVING`):
     ```bash
-    $ tctl cluster health
-    temporal.api.workflowservice.v1.WorkflowService: SERVING
-    $ tctl admin membership list_gossip  # list all temporal services.
-    [
-      {
-        "role": "frontend",
-        "member_count": 1,
-        "members": [
-          {
-            "identity": "0.0.0.0:7233"
-          }
-        ]
-      },
-      {
-        "role": "history",
-        "member_count": 1,
-        "members": [
-          {
-            "identity": "0.0.0.0:7234"
-          }
-        ]
-      },
-      {
-        "role": "matching",
-        "member_count": 1,
-        "members": [
-          {
-            "identity": "0.0.0.0:7235"
-          }
-        ]
-      },
-      {
-        "role": "worker",
-        "member_count": 1,
-        "members": [
-          {
-            "identity": "0.0.0.0:7239"
-          }
-        ]
-      }
-    ]
+    temporal operator cluster health
     ```
+
+   Inspect the cluster configuration:
+    ```bash
+    temporal operator cluster describe --detail
+    ```
+
 4. Go to `https://app-workflow-trigger.onrender.com/`. If everything is well, you will see "OK!".
 5. Now trigger the example workflow by visiting `https://app-workflow-trigger.onrender.com/trigger-workflow`. It should print
     ```
