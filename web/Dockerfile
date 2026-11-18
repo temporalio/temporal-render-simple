@@ -1,3 +1,4 @@
-FROM temporalio/web:1.13.0
+FROM temporalio/ui:2.58.1
 
-ENTRYPOINT ["/bin/sh", "-c", "TEMPORAL_GRPC_ENDPOINT=$TEMPORAL_GRPC_HOST:7233 node server.js"]
+# Render supplies the private-service hostname separately from its gRPC port.
+ENTRYPOINT ["/bin/sh", "-c", "export TEMPORAL_ADDRESS=$TEMPORAL_GRPC_HOST:7233; exec ./start-ui-server.sh"]
